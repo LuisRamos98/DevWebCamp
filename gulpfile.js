@@ -30,6 +30,7 @@ function css() {
         .pipe( sourcemaps.init())
         .pipe( sass({outputStyle: 'expanded'}))
         // .pipe( postcss([autoprefixer(), cssnano()]))
+        .pipe( postcss([autoprefixer()]))
         .pipe( sourcemaps.write('.'))
         .pipe(  dest('public/build/css') );
 }

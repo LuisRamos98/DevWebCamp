@@ -21,7 +21,6 @@ class PonentesController {
         $ponente = new Ponente();
         
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            debuguear($_POST);
             //Leer Imagen
             if(!empty($_FILES['imagen']['tmp_name'])) {
                 // debuguear('SI HAY IMAGEN');
@@ -40,19 +39,18 @@ class PonentesController {
             }
 
             $_POST['redes'] = json_encode($_POST['redes'],JSON_UNESCAPED_SLASHES);
-            debuguear($_POST);
             $ponente->sincronizar($_POST);
-
+            
             //VALIDAR
             $alertas = $ponente->validar();
-
+            
             //Guardar el registro
-            if(!empty($alertas)) {
-
+            if(empty($alertas)) {
+                
                 //Guardar las imagenes
                 $imagen_png->save($carpeta_imagen . '/'. $nombre_imagen . '.png');
                 $imagen_webp->save($carpeta_imagen . '/'. $nombre_imagen . '.webp');
-
+                
                 //Guardar en la BD
                 $resultado = $ponente->guardar();
 

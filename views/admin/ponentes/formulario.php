@@ -58,6 +58,18 @@
             name="imagen"
         >
     </div>
+
+    <?php if(isset($imagen_actual)):?>
+        <p class="formulario__texto">Imagen Actual:</p>
+        <div class="formulario__imagen">
+            <picture>
+                <source srcset="<?php echo $_ENV['HOST'] . '/img/speakers/' . $imagen_actual ?>.webp" type="image/webp">
+                <source srcset="<?php echo $_ENV['HOST'] . '/img/speakers/' . $imagen_actual ?>.png" type="image/png">
+                <img src="<?php echo $_ENV['HOST'] . '/img/speakers/' . $imagen_actual ?>.png" alt="Imagen Ponente">
+            </picture>
+        </div>
+    <?php endif;?>
+
 </fieldset>
 
 <fieldset class="formulario__fieldset">

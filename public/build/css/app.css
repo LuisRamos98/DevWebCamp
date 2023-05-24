@@ -913,4 +913,52 @@ h3 {
 .table__accion:hover {
   cursor: pointer;
 }
+
+.paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  gap: 2rem;
+}
+@media (min-width: 768px) {
+  .paginacion {
+    justify-content: flex-end;
+  }
+}
+.paginacion__enlace {
+  color: #007df4;
+  font-size: 1.6rem;
+}
+.paginacion__enlace--texto {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #007df4;
+}
+.paginacion__enlace--texto:hover {
+  background-color: #007df4;
+  color: #FFFFFF;
+}
+.paginacion__enlace--actual {
+  font-weight: 700;
+  color: #64748B;
+  display: none;
+}
+@media (min-width: 768px) {
+  .paginacion__enlace--actual {
+    display: inline;
+  }
+}
+.paginacion__enlace--numero {
+  font-weight: 700;
+  display: none;
+}
+@media (min-width: 768px) {
+  .paginacion__enlace--numero {
+    display: inline;
+  }
+}
 /*# sourceMappingURL=app.css.map */

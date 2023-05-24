@@ -45,3 +45,7 @@
     
 
 </div>
+
+<?php 
+    echo $paginacion;
+?>

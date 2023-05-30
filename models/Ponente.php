@@ -4,8 +4,8 @@ namespace Model;
 
 class Ponente extends ActiveRecord {
     
-    public static $tabla = 'ponentes';
-    public static $columnasDB = ['id','nombre','apellido','ciudad','pais','imagen','tags','redes'];
+    protected static $tabla = 'ponentes';
+    protected static $columnasDB = ['id','nombre','apellido','ciudad','pais','imagen','tags','redes'];
 
     public $id;
     public $nombre;

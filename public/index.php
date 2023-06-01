@@ -6,6 +6,7 @@ use MVC\Router;
 use Controllers\AuthController;
 use Controllers\AdminController;
 use Controllers\APIEvento;
+use Controllers\APIPonente;
 use Controllers\EventosController;
 use Controllers\RegalosController;
 use Controllers\PonentesController;
@@ -52,6 +53,9 @@ $router->post('/admin/eventos/crear', [EventosController::class, 'crear']);
 //API Eventos
 $router->get('/api/eventos',[APIEvento::class,'index']);
 // FIN API Eventos
+//API ponente
+$router->get('/api/ponentes',[APIPonente::class,'index']);
+// FIN API ponente
 
 $router->get('/admin/registrados', [RegistradosController::class, 'index']);
 

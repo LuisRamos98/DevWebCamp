@@ -85,6 +85,9 @@
             id="ponentes"
             placeholder="Buscar Ponente"
         >
+        <ul class="listado-ponentes" id="listado-ponentes"></ul>
+
+        <input type="hidden" name='ponente_id' value="">
     </div>
 
     <div class="formulario__campo">

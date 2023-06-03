@@ -52,11 +52,12 @@
                         name="dia"
                         id="<?php echo strtolower($dia->nombre);?>"
                         value="<?php echo $dia->id;?>"
+                        <?php echo $evento->dia_id == $dia->id ? 'checked' : '';?>
                     >
                 </div>
             <?php endforeach;?>
 
-            <input type="hidden" value='' name="dia_id" >
+            <input type="hidden" value='<?php echo $evento->dia_id ?? ''; ?>' name="dia_id" >
         </div>
     </div>
 
@@ -69,7 +70,7 @@
             <?php endforeach;?>
         </ul>
 
-        <input type="hidden" value='' name="hora_id" >
+        <input type="hidden" value='<?php echo $evento->hora_id ?? ''; ?>' name="hora_id" >
     </div>
 
 </fieldset>

@@ -51,12 +51,16 @@ $router->get('/admin/eventos/crear', [EventosController::class, 'crear']);
 $router->post('/admin/eventos/crear', [EventosController::class, 'crear']);
 $router->get('/admin/eventos/editar', [EventosController::class, 'editar']);
 $router->post('/admin/eventos/editar', [EventosController::class, 'editar']);
+$router->post('/admin/eventos/eliminar', [EventosController::class, 'eliminar']);
 
 //API Eventos
 $router->get('/api/eventos',[APIEvento::class,'index']);
 // FIN API Eventos
-//API ponente
+//API ponentes
 $router->get('/api/ponentes',[APIPonente::class,'index']);
+// FIN API ponentes
+//API ponente
+$router->get('/api/ponente',[APIPonente::class,'ponente']);
 // FIN API ponente
 
 $router->get('/admin/registrados', [RegistradosController::class, 'index']);

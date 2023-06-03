@@ -57,7 +57,7 @@
                 </div>
             <?php endforeach;?>
 
-            <input type="hidden" value='<?php echo $evento->dia_id ?? ''; ?>' name="dia_id" >
+            <input type="hidden" value='<?php echo $evento->dia_id; ?>' name="dia_id" >
         </div>
     </div>
 
@@ -70,7 +70,7 @@
             <?php endforeach;?>
         </ul>
 
-        <input type="hidden" value='<?php echo $evento->hora_id ?? ''; ?>' name="hora_id" >
+        <input type="hidden" value='<?php echo $evento->hora_id; ?>' name="hora_id" >
     </div>
 
 </fieldset>
@@ -88,7 +88,7 @@
         >
         <ul class="listado-ponentes" id="listado-ponentes"></ul>
 
-        <input type="hidden" name='ponente_id' value="">
+        <input type="hidden" name='ponente_id' value="<?php echo $evento->ponente_id;?>">
     </div>
 
     <div class="formulario__campo">

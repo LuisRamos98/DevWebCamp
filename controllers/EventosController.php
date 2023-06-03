@@ -109,13 +109,38 @@ class EventosController {
         }
         
 
-        $router->render('admin/eventos/crear',[
-            'titulo' => 'Registrar Evento',
+        $router->render('admin/eventos/editar',[
+            'titulo' => 'Editar Evento',
             'alertas' => $alertas,
             'categorias' => $categorias,
             'dias' => $dias,
             'horas' => $horas,
             'evento' => $evento
         ]);
+    }
+
+    public static function eliminar() {
+
+
+        if($_SERVER['REQUEST_METHOD']) {
+            
+            if(!is_admin()) {
+                header('Location: /login');
+            }
+
+            $id = $_POST['id'];
+
+            $evento = Evento::find($id);
+
+            if(!isset($evento)) {
+                header('Location: /admin/eventos');
+            }
+
+            $resultado = $evento->eliminar();
+
+            if($resultado) {
+                header('Location: /admin/eventos');
+            }
+        }
     }
 }

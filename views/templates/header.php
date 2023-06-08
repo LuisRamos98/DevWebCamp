@@ -21,10 +21,10 @@
     <div class="barra__contenido">
         <a href="/"><h2 class="barra__logo">&#60;DevWebCamp/></h2></a>
         <nav class="navegacion">
-            <a href="/devwebcamp" class="navegacion__enlace">Evento</a>
-            <a href="/paquetes" class="navegacion__enlace">Paquetes</a>
-            <a href="/workshop-conferencias" class="navegacion__enlace">Workshop / Conferencias</a>
-            <a href="/registro" class="navegacion__enlace">Comprar Boleto</a>
+            <a href="/devwebcamp" class="navegacion__enlace <?php echo pagina_actual('/devwebcamp') ? 'navegacion__enlace--actual' : ''; ?>">Evento</a>
+            <a href="/paquetes" class="navegacion__enlace <?php echo pagina_actual('/paquetes') ? 'navegacion__enlace--actual' : ''; ?>">Paquetes</a>
+            <a href="/workshop-conferencias" class="navegacion__enlace <?php echo pagina_actual('/workshop-conferencias') ? 'navegacion__enlace--actual' : ''; ?> ">Workshop / Conferencias</a>
+            <a href="/registro" class="navegacion__enlace <?php echo pagina_actual('/registro') ? 'navegacion__enlace--actual' : ''; ?> ">Comprar Boleto</a>
         </nav>
     </div>
 </div>

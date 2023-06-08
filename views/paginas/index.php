@@ -122,4 +122,8 @@
             <p class="boleto__precio">Gratis - $0</p>
         </div>
     </div>
+
+    <div class="boleto__enlace-contenedor">
+        <a href="/paquetes" class="boleto__enlace">Ver Paquetes</a>
+    </div>
 </section>

@@ -59,6 +59,43 @@ class RegistroController {
         ]);
     }
 
+    public static function pagar() {
+        
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            if(!is_auth()) {
+                header('Location: /login');
+            }
+
+            //Creando los datos del registro
+            if(empty($_POST)) {
+                echo json_encode([]);
+                return;
+            }
+
+            $datos = $_POST;
+            $datos['token'] = substr(md5(uniqid(rand(),true)),0,8);
+            $datos['usuario_id'] = $_SESSION['id'];
+
+            try {
+                $registro = new Registro($datos);
+                $resultado = $registro->guardar();
+
+                if($resultado) {
+                    echo json_encode($resultado);
+                }
+
+            } catch (\Throwable $th) {
+                //throw $th;
+                echo json_encode([
+                    'resultado' => 'error'
+                ]);
+            }
+
+        }
+
+    }
+
     public static function boleto(Router $router) {
 
         $id = $_GET['id'];

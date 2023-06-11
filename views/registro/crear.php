@@ -63,25 +63,31 @@ function createOrder() {
     createOrder: function(data, actions) {
       return actions.order.create({
         purchase_units: [{
-            "description": "Pago Presencial DevWebCamp",
+            "description": "1",
             "amount": {"currency_code":"USD","value":199}
         }]
       });
     },
 
     onApprove: function(data, actions) {
-      // This function is called when the buyer approves the payment
-      // You can handle the payment completion here
       return actions.order.capture().then(function(orderData){
 
-        //Full Available details
-        console.log('Capture result', orderData, JSON.stringify(orderData,null,2));
+        const datos = new FormData();
+        datos.append('paquete_id', orderData.purchase_units[0].description);
+        datos.append('pago_id', orderData.purchase_units[0].payments.captures[0].id);
 
-        //Show a success message within this page e.g
-        const element = document.querySelector('#paypal-button-container');
+        url = '/finalizar-registro/pagar';
+        fetch(url,{
+            method: 'POST',
+            body: datos
+        })
+        .then(response => response.json())
+        .then(resultado => {
+            if(resultado.resultado) {
+                actions.redirect('http://localhost:3000/finalizar-registro/conferencias');
+            }
+        })
 
-        element.innerHTML = '';
-        element.innerHTML = '<h3>Thank you for your payment!</h3>'
       })
     },
 

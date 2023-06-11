@@ -25,6 +25,9 @@
                 <li class="paquete__elemento">Comida y Bebida</li>
             </ul>
             <p class="paquete__precio">$199</p>
+            
+        <!-- Set up a container element for the button -->
+        <div id="paypal-button-container"></div>
         </div>
         <div class="paquete">
             <h3 class="paquete__nombre">Pase Virtual</h3>
@@ -38,3 +41,54 @@
         </div>
     </div>
 </main>
+
+
+<!-- Replace "test" with your own sandbox Business account app client ID -->
+<script 
+    src="https://www.paypal.com/sdk/js?client-id=ATq1MZqHJCSasKT_nU6yTXur5n4MzeDPHy1iHuQLQW_bwpP10jfE70WEmaPPEJCRERPJ0pRUuXV48Ye0&currency=USD"
+
+    data-sdk-integration-source='button-factory'
+></script>
+
+<script>
+function createOrder() {
+  paypal.Buttons({
+    style: {
+        shape: 'rect',
+        color: 'blue',
+        layout: 'vertical',
+        label: 'pay',
+    },
+
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+            "description": "Pago Presencial DevWebCamp",
+            "amount": {"currency_code":"USD","value":199}
+        }]
+      });
+    },
+
+    onApprove: function(data, actions) {
+      // This function is called when the buyer approves the payment
+      // You can handle the payment completion here
+      return actions.order.capture().then(function(orderData){
+
+        //Full Available details
+        console.log('Capture result', orderData, JSON.stringify(orderData,null,2));
+
+        //Show a success message within this page e.g
+        const element = document.querySelector('#paypal-button-container');
+
+        element.innerHTML = '';
+        element.innerHTML = '<h3>Thank you for your payment!</h3>'
+      })
+    },
+
+    onError: function(err) {
+        console.log(err);
+    }
+  }).render('#paypal-button-container');
+}
+createOrder()
+</script>

@@ -19,7 +19,7 @@
 
         <button
             class="evento__agregar"
-            data-id="<?php $evento->id;?>"
+            data-id="<?php echo $evento->id;?>"
             type="button"
             <?php echo ($evento->disponibles === '0') ? 'disabled' : '';?>
         >

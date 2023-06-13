@@ -165,6 +165,47 @@ class RegistroController {
             }
         }
 
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            if(!is_auth()) {
+                header('Location: /login');
+            }
+
+            $eventos = explode(',',$_POST['eventos']);
+            if(empty($eventos)) {
+                echo json_encode(['resultado' => false]);
+                return;
+            }
+
+            $registro = Registro::where('usuario_id',$_SESSION['id']);
+            if(!isset($registro) || $registro->paquete_id !== '1') {
+                echo json_encode(['resultado' => false]);
+                return;
+            }
+
+            //Eventos en memoria
+            $eventos_array = [];
+
+            foreach($eventos as $evento_id) {
+                $evento = Evento::find($evento_id);
+
+                if(!isset($evento) || $evento->disponibles === '0') {
+                    echo json_encode(['resultado' => false]);
+                    return;
+                }
+
+                $eventos_array[] = $evento;
+            }
+
+            foreach($eventos_array as $evento) {
+                $evento->disponibles -= 1;
+                $evento->guardar();
+            }
+
+            
+
+        }
+
         $regalos = Regalo::all('ASC');
 
         $router->render('registro/conferencias',[

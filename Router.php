@@ -32,8 +32,8 @@ class Router
         if ( $fn ) {
             call_user_func($fn, $this);
         } else {
-            // header('Location: /404');
-            echo $url_actual . ' ' . $method;
+            header('Location: /404');
+            // echo $url_actual . ' ' . $method;
         }
     }
 

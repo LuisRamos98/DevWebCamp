@@ -11,6 +11,7 @@ use Model\Ponente;
 use Model\Usuario;
 use Model\Registro;
 use Model\Categoria;
+use Model\EventoRegistro;
 use Model\Regalo;
 
 class RegistroController {
@@ -39,6 +40,12 @@ class RegistroController {
 
             if(!is_auth()) {
                 header('Location: /login');
+            }
+
+
+            $registro = Registro::where('usuario_id', $_SESSION['id']);
+            if(isset($registro) && $registro->paquete === '3') {
+                header('Location: /boleto?id=' . urlencode($registro->token));
             }
 
             $token = substr(md5(uniqid(rand(),true)),0,8);
@@ -200,6 +207,15 @@ class RegistroController {
             foreach($eventos_array as $evento) {
                 $evento->disponibles -= 1;
                 $evento->guardar();
+
+                //ALMACENAR LOS DATOS
+                $datos = [
+                    'evento_id' => (int) $evento->id,
+                    'registro_id' => (int) $registro->id
+                ];
+
+                $registro_usuario = new EventoRegistro($datos);
+                $registro_usuario->guardar();
             }
 
             

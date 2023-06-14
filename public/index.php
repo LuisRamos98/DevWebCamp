@@ -54,7 +54,6 @@ $router->post('/admin/eventos/crear', [EventosController::class, 'crear']);
 $router->get('/admin/eventos/editar', [EventosController::class, 'editar']);
 $router->post('/admin/eventos/editar', [EventosController::class, 'editar']);
 $router->post('/admin/eventos/eliminar', [EventosController::class, 'eliminar']);
-
 //API Eventos
 $router->get('/api/eventos',[APIEvento::class,'index']);
 // FIN API Eventos

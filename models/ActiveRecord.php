@@ -98,7 +98,7 @@ class ActiveRecord {
             $resultado = $this->actualizar();
         } else {
             // Creando un nuevo registro
-            $resultado = $this->crear();
+            $resultado = $this->crear();            
         }
         return $resultado;
     }

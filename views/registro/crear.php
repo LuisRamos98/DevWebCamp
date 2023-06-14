@@ -26,8 +26,8 @@
             </ul>
             <p class="paquete__precio">$199</p>
             
-        <!-- Set up a container element for the button -->
-        <div id="paypal-button-container"></div>
+            <!-- Set up a container element for the button -->
+            <div id="paypal-button-container"></div>
         </div>
         <div class="paquete">
             <h3 class="paquete__nombre">Pase Virtual</h3>
@@ -38,6 +38,9 @@
                 <li class="paquete__elemento">Acceso a las Grabaciones</li>
             </ul>
             <p class="paquete__precio">$49</p>
+
+            <!-- Set up a container element for the button -->
+            <div id="paypal-button-container--virtual"></div>
         </div>
     </div>
 </main>
@@ -84,7 +87,8 @@ function createOrder() {
         .then(response => response.json())
         .then(resultado => {
             if(resultado.resultado) {
-                actions.redirect('http://localhost:3000/finalizar-registro/conferencias');
+                // actions.redirect('http://localhost:3000/finalizar-registro/conferencias');
+                console.log(resultado);
             }
         })
 
@@ -95,6 +99,52 @@ function createOrder() {
         console.log(err);
     }
   }).render('#paypal-button-container');
+
+  paypal.Buttons({
+    style: {
+        shape: 'rect',
+        color: 'blue',
+        layout: 'vertical',
+        label: 'pay',
+    },
+
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+            "description": "2",
+            "amount": {"currency_code":"USD","value":49}
+        }]
+      });
+    },
+
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(orderData){
+
+        const datos = new FormData();
+        datos.append('paquete_id', orderData.purchase_units[0].description);
+        datos.append('pago_id', orderData.purchase_units[0].payments.captures[0].id);
+
+        url = '/finalizar-registro/pagar';
+        fetch(url,{
+            method: 'POST',
+            body: datos
+        })
+        .then(response => response.json())
+        .then(resultado => {
+            if(resultado.resultado) {
+                // actions.redirect('http://localhost:3000/finalizar-registro/conferencias');
+                
+                console.log(resultado);
+            }
+        })
+
+      })
+    },
+
+    onError: function(err) {
+        console.log(err);
+    }
+  }).render('#paypal-button-container--virtual');
 }
 createOrder()
 </script>

@@ -27,6 +27,10 @@ class RegistroController {
         if(isset($registro) && $registro->paquete_id === '3') {            
             header('Location: /boleto?id=' . urlencode($registro->token));
         }
+
+        if(isset($registro) && $registro->paquete_id === '1') {            
+            header('Location: /finalizar-registro/conferencias');
+        }
         
         $router->render('registro/crear',[
             'titulo' => 'Finalizar Registro'
@@ -140,6 +144,10 @@ class RegistroController {
 
         $registro = Registro::where('usuario_id',$_SESSION['id']);
 
+        if(isset($registro->regalo_id)) {
+            header('Location: /boleto?id=' . urlencode($registro->token));
+        }
+
         if($registro->paquete_id !== '1') {
             header('Location: /');
         }
@@ -218,8 +226,20 @@ class RegistroController {
                 $registro_usuario->guardar();
             }
 
-            
+            //Almacenar el regalo
+            $registro->sincronizar(['regalo_id' => $_POST['regalo_id']]);
+            $resultado = $registro->guardar();
 
+            if($resultado) {
+                echo json_encode([
+                    'resultado' => true,
+                    'token' => $registro->token
+                ]);
+            } else {
+                echo json_encode(['resultado' => false]);
+            }
+
+            return;
         }
 
         $regalos = Regalo::all('ASC');

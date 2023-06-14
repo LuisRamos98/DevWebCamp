@@ -1608,7 +1608,7 @@ h3 {
 }
 
 .bloque {
-  padding: 2rem;
+  padding: 3rem;
   border-radius: 1rem;
   color: #FFFFFF;
 }
@@ -1617,6 +1617,12 @@ h3 {
 }
 .bloque:nth-child(2) {
   background-image: linear-gradient(to left top, #A855F7, #cd9efa);
+}
+.bloque:nth-child(3) {
+  background-image: linear-gradient(to left top, #59910b, #85d810);
+}
+.bloque:nth-child(4) {
+  background-image: linear-gradient(to left top, #17769e, #23a7df);
 }
 .bloque__heading {
   margin: 1rem 0 2rem 0;

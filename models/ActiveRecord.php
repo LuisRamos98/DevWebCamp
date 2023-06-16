@@ -180,6 +180,23 @@ class ActiveRecord {
         return array_shift($total);
     }
 
+    //Devuelve el total de registros con where
+    public static function totalWhere($array = []) {
+        $query = "SELECT COUNT(*) FROM " . static::$tabla . ' WHERE ';
+
+        foreach($array as $key => $value) {
+            if(array_key_last($array) == $key) {
+                $query .= "{$key} = '{$value}' ";
+            } else {
+                $query .= " {$key} = '{$value}' AND ";
+            }
+        }
+        $resultado = self::$db->query($query);
+        $total = $resultado->fetch_array();
+
+        return array_shift($total);
+    }
+
     // crea un nuevo registro
     public function crear() {
         // Sanitizar los datos

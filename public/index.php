@@ -3,16 +3,17 @@
 require_once __DIR__ . '/../includes/app.php';
 
 use MVC\Router;
+use Controllers\APIEvento;
+use Controllers\APIRegalo;
+use Controllers\APIPonente;
 use Controllers\AuthController;
 use Controllers\AdminController;
-use Controllers\APIEvento;
-use Controllers\APIPonente;
 use Controllers\EventosController;
 use Controllers\PaginasController;
 use Controllers\RegalosController;
 use Controllers\PonentesController;
-use Controllers\RegistradosController;
 use Controllers\RegistroController;
+use Controllers\RegistradosController;
 
 $router = new Router();
 
@@ -54,15 +55,12 @@ $router->post('/admin/eventos/crear', [EventosController::class, 'crear']);
 $router->get('/admin/eventos/editar', [EventosController::class, 'editar']);
 $router->post('/admin/eventos/editar', [EventosController::class, 'editar']);
 $router->post('/admin/eventos/eliminar', [EventosController::class, 'eliminar']);
-//API Eventos
+//API
 $router->get('/api/eventos',[APIEvento::class,'index']);
-// FIN API Eventos
-//API ponentes
 $router->get('/api/ponentes',[APIPonente::class,'index']);
-// FIN API ponentes
-//API ponente
 $router->get('/api/ponente',[APIPonente::class,'ponente']);
-// FIN API ponente
+$router->get('/api/regalos',[APIRegalo::class,'index']);
+// FIN API
 
 $router->get('/admin/registrados', [RegistradosController::class, 'index']);
 

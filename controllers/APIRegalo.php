@@ -1,0 +1,30 @@
+<?php
+
+namespace Controllers;
+
+use Model\Regalo;
+use Model\Registro;
+
+class APIRegalo {
+
+    public static function index() {
+
+        if(!is_admin()) {
+            echo json_encode([]);
+            return;
+        }
+
+        $regalos = Regalo::all(); 
+
+        foreach($regalos as $regalo) {
+            $regalo->total = Registro::totalWhere([
+                'regalo_id' => $regalo->id,
+                'paquete_id' => '1'
+            ]);
+        }
+
+        echo json_encode($regalos);
+        return;
+    }
+
+}
